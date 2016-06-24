@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.3
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    environment:
+      DATABASE_URL: postgres://postgres@db/mtchmkr_development
+      PUMA_WORKERS: 1
+      SECRET_KEY_BASE: some_secret
+    command: [ "bin/rails", "server", "--port", "3000", "--bind", "0.0.0.0" ]
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  postgres_data:

@@ -21,3 +21,16 @@ Also, since we're expecting to hire more people soon, it should be able to creat
 
 1. Provide a page that lists the one on one schedule for all Participants in the database
 2. Provide a way to create multiple Participants at once using a comma-delimited string
+
+
+---
+
+# Setup with Docker
+
+```
+$ docker-compose build web
+$ docker-compose up db
+$ docker-compose run --rm web rake db:create
+$ docker-compose run --rm web rake db:migrate
+$ docker-compose up web
+```
